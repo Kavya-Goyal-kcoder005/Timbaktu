@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import 'multer';
 import { MediaMetadata, MediaProvider } from '@timbaktu/shared';
 import { config } from '../config';
 import { logger } from '../utils/logger';
