@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "types": ["node", "multer"]
+    "types": ["node", "multer"],
+    "noImplicitAny": false,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }
