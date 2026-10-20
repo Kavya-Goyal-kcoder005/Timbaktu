@@ -153,7 +153,7 @@ export const PostDetailPage: React.FC = () => {
             <Badge variant="sage" icon={<Clock className="w-3.5 h-3.5" />}>
               {post.readingTimeMinutes} min read
             </Badge>
-            {post.tags?.map((t) => (
+            {post.tags?.map((t: string) => (
               <Badge key={t} variant="gold">
                 #{t}
               </Badge>

@@ -93,7 +93,7 @@ export const HomePage: React.FC = () => {
             <span className="text-xs font-semibold uppercase tracking-wider text-bark-500 mr-2 shrink-0">
               Topics:
             </span>
-            {curatedTags.map((tag) => (
+            {curatedTags.map((tag: string) => (
               <button
                 key={tag}
                 onClick={() => handleTagClick(tag)}
@@ -166,7 +166,7 @@ export const HomePage: React.FC = () => {
                         <Badge variant="sage" icon={<Clock className="w-3.5 h-3.5" />}>
                           {featuredPost.readingTimeMinutes} min read
                         </Badge>
-                        {featuredPost.tags?.map((t) => (
+                        {featuredPost.tags?.map((t: string) => (
                           <Badge key={t} variant="gold">
                             #{t}
                           </Badge>

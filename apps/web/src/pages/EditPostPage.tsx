@@ -194,7 +194,7 @@ export const EditPostPage: React.FC = () => {
             Story Tags (Up to 6)
           </label>
           <div className="flex flex-wrap gap-2 mb-2">
-            {tags.map((tag) => (
+            {tags.map((tag: string) => (
               <span
                 key={tag}
                 className="inline-flex items-center gap-1.5 bg-sage-200 text-forest-800 text-xs px-2.5 py-1 rounded-full font-medium"

@@ -10,7 +10,10 @@
     "dev": "npm run dev --workspaces --if-present",
     "dev:web": "npm run dev --workspace=@timbaktu/web",
     "dev:api": "npm run dev --workspace=@timbaktu/api",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=@timbaktu/shared && npm run build --workspace=@timbaktu/web",
+    "build:all": "npm run build --workspace=@timbaktu/shared && npm run build --workspace=@timbaktu/api && npm run build --workspace=@timbaktu/web",
+    "build:web": "npm run build --workspace=@timbaktu/shared && npm run build --workspace=@timbaktu/web",
+    "build:api": "npm run build --workspace=@timbaktu/shared && npm run build --workspace=@timbaktu/api",
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
