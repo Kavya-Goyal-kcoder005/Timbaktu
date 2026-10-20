@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import { config } from './index';
 import { logger } from '../utils/logger';
 
-let memoryServer: MongoMemoryServer | null = null;
+let memoryServer: { stop: () => Promise<boolean | void>; getUri: () => string } | null = null;
 
 export async function connectDatabase(): Promise<void> {
   try {
@@ -22,9 +21,15 @@ export async function connectDatabase(): Promise<void> {
     }
   }
 
+  // In production, do not attempt to start an in-memory database
+  if (config.nodeEnv === 'production') {
+    throw new Error('MONGODB_URI must be provided in production environment.');
+  }
+
   // Fallback to MongoMemoryServer in development and testing if external database is unavailable
   try {
     logger.info('Starting local in-memory MongoDB instance for development & testing...');
+    const { MongoMemoryServer } = await import('mongodb-memory-server');
     memoryServer = await MongoMemoryServer.create();
     const uri = memoryServer.getUri();
     await mongoose.connect(uri);
