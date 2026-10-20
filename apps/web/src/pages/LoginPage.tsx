@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { User } from '@timbaktu/shared';
 import { LogIn, AlertCircle } from 'lucide-react';
 import { Navbar } from '../components/navigation/Navbar';
 import { Footer } from '../components/navigation/Footer';
@@ -32,7 +33,7 @@ export const LoginPage: React.FC = () => {
       });
 
       const text = await res.text();
-      let json: { success?: boolean; error?: { message?: string } } = {};
+      let json: { success?: boolean; data?: User; error?: { message?: string } } = {};
       try {
         json = text ? JSON.parse(text) : {};
       } catch {
@@ -44,7 +45,7 @@ export const LoginPage: React.FC = () => {
         throw new Error(json.error?.message || 'Invalid username or password.');
       }
 
-      setUser(json.data);
+      setUser(json.data ?? null);
       navigate('/dashboard');
     } catch (err: unknown) {
       setErrorMessage((err as Error).message);
