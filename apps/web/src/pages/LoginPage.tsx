@@ -31,7 +31,15 @@ export const LoginPage: React.FC = () => {
         body: JSON.stringify({ login: login.trim(), password }),
       });
 
-      const json = await res.json();
+      const text = await res.text();
+      let json: { success?: boolean; error?: { message?: string } } = {};
+      try {
+        json = text ? JSON.parse(text) : {};
+      } catch {
+        // Server returned a non-JSON or empty body — treat as a generic auth failure
+        throw new Error('Invalid username or password.');
+      }
+
       if (!res.ok || !json.success) {
         throw new Error(json.error?.message || 'Invalid username or password.');
       }
